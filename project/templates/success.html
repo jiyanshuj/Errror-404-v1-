@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        /* General body styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://ec.europa.eu/eurostat/documents/29567/19147678/phaisarnwong2517_AdobeStock_336596257_RV.jpg/e57cc2be-a232-d68c-d5c2-20a1f9a83e12?t=1716366406127') no-repeat center center fixed; /* Add your image URL here */
+            background-size: cover;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* Content container */
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Add a translucent background */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        /* Header styles */
+        h1 {
+            color: #FFD700;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive text */
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trip Details</h1>
+
+        <p>Current Location: {{ current_location }}</p>
+        <p>Destination: {{ destination }}</p>
+        <p>Budget: {{ budget }} Rs.</p>
+
+        {% if distance < 70 %}
+            <p>Recommended Transport: Bus</p>
+            <a href="https://www.makemytrip.com/bus-tickets/aictsl_campus-bus-stand.html" target="_blank" class="btn">Book Now</a>
+        {% elif distance >= 70 and distance < 1000 %}
+            <p>Recommended Transport: Train</p>
+            <a href="https://www.irctc.co.in/nget/train-search" target="_blank" class="btn">Book Now</a>
+        {% else %}
+            <p>Recommended Transport: Airplane</p>
+            <a href="https://www.goindigo.in/" target="_blank" class="btn">Book Now</a>
+        {% endif %}
+        <button type="button" class="btn" onclick="window.location.href='{% url 'booking' %}'">Hotel booking</button>
+    </div>
+</body>
+</html>

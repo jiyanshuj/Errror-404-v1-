@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment QR Code</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --success-color: #10b981;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-container {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .payment-header h1 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin: 1rem 0;
+        }
+
+        .qr-container {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .payment-info {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .timer {
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 1rem 0;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .status.pending {
+            color: var(--primary-color);
+        }
+
+        .status.success {
+            color: var(--success-color);
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .payment-container {
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
+            
+            .qr-code {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>Complete Your Payment</h1>
+            <p>Scan the QR code below to proceed with the payment</p>
+            <div class="payment-amount">Rs.299.00</div>
+        </div>
+
+        <div class="qr-container">
+            <a href="https://ibb.co/RHT4y2g"><img src="https://i.ibb.co/RHT4y2g/Whats-App-Image-2024-12-15-at-8-35-15-AM.jpg" alt="Whats-App-Image-2024-12-15-at-8-35-15-AM" border="0" /></a>
+            <p class="payment-info">
+                Open your payment app and scan this code<br>
+                Time remaining: <span class="timer">15:00</span>
+            </p>
+        </div>
+
+        <div class="status pending">
+            <div class="spinner"></div>
+            Waiting for payment...
+        </div>
+    </div>
+
+    <script>
+        // Timer functionality
+        function startTimer(duration, display) {
+            let timer = duration;
+            const interval = setInterval(() => {
+                const minutes = parseInt(timer / 60, 10);
+                const seconds = parseInt(timer % 60, 10);
+
+                display.textContent = ${minutes}:${seconds < 10 ? '0' : ''}${seconds};
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = 'Expired';
+                    document.querySelector('.status').innerHTML = 'Payment session expired';
+                }
+            }, 1000);
+        }
+
+        // Initialize when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start 15-minute countdown
+            const fifteenMinutes = 60 * 15;
+            const display = document.querySelector('.timer');
+            startTimer(fifteenMinutes, display);
+
+            // Simulate payment status check
+            setTimeout(() => {
+                const status = document.querySelector('.status');
+                status.classList.remove('pending');
+                status.classList.add('success');
+                status.innerHTML = '<i class="fas fa-check-circle"></i> Payment completed';
+            }, 5000); // Simulate after 5 seconds
+        });
+    </script>
+</body>
+</html>

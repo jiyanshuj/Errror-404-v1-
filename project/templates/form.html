@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Now</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1920');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .booking-page {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8); /* Added transparency for better readability */
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #3d0159;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .billing-section, .hotel-details-section {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color:rgb(0, 0, 0) ;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color:#2563eb;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color:#2572eb;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #3d0159;
+      margin-bottom: 15px;
+    }
+
+    .hotel-details {
+      font-size: 14px;
+      color: gray;
+    }
+    footer .copyright {
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="booking-page">
+    <h2>Booking Now</h2>
+
+    <form class="booking-form">
+      <!-- Billing Details Section -->
+      <div class="billing-section">
+        <h3>Billing Details</h3>
+        <label>First Name</label>
+        <input type="text" name="firstName" required />
+
+        <label>Last Name</label>
+        <input type="text" name="lastName" required />
+
+        <label>Email Address</label>
+        <input type="email" name="email" required />
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required />
+
+        <label>Passport Number (optional)</label>
+        <input type="text" name="passport" />
+
+        <label>Address</label>
+        <textarea name="address" required></textarea>
+      </div>
+
+      <!-- Extra Facilitation Section -->
+      <div class="hotel-details-section">
+        <h3>Extra Facilitation</h3>
+        <label>
+          <input type="checkbox" name="airportPickup" />
+          Airport Pickup: 2300.00
+        </label>
+        <label>
+          <input type="checkbox" name="activity" />
+          Activity: 2300.00
+        </label>
+        <label>
+          <input type="checkbox" name="massage" />
+          Massage and Spa: 2300.00
+        </label>
+        <label>Special Request</label>
+        <input type="text" name="specialRequest" />
+      </div>
+
+      <!-- Hotel Information Section -->
+      <div class="hotel-details-section">
+        <h3>Hotel Information</h3>
+        <div class="hotel-details">
+          <p><strong>Hotel Name:</strong> FabExpress Ascot International</p>
+          <p><strong>Date:</strong> 14 February 2021</p>
+          <p><strong>Location:</strong> Kurla, Mumbai - City center</p>
+          <p><strong>Room Details:</strong> 1 Room, 2 Guests, 1 Night</p>
+          <p class="price">Total Price: Rs. 2888/-</p>
+        </div>
+      </div>
+
+      <!-- Terms and Conditions Section -->
+      <div class="hotel-details-section">
+        <label>
+          <input type="checkbox" name="agree" required />
+          I agree to the rules, terms, and conditions.
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="button" class="btn" onclick="window.location.href='{% url 'pay' %}'">Pay Now</button>
+    </form>
+  </div>
+  <footer>
+    <div class="copyright">&copy; Error 404 2024 All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
