@@ -72,7 +72,7 @@ cd travel-booking-app
 - Open another tab and go to \http://localhost:3000\ for the React frontend.
 
 ## Folder Structure
-\\\
+
 project/
 │
 ├── manage.py                # Django management script
